@@ -1,6 +1,6 @@
 'use strict';
 
-jsSrcApp.controller('MainCtrl', ['$scope', function($scope) {
+jsSrcApp.controller('ProductCtrl', ['$scope', function($scope) {
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
