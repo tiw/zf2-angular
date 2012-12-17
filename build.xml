@@ -1,0 +1,53 @@
+<project name="zf2-angularjs" default="dist" basedir=".">
+    <description>
+        Build for zf2-angular
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+  <property name="js-src" location="js-src"/>
+  <property name="public" location="public"/>
+
+  <target name="clean-yeoman-build">
+      <delete>
+          <filelist dir="${public}">
+              <file name="404.html"/>
+              <file name="favicon.ico"/>
+              <file name="index.html"/>
+              <file name="manifest.appcache"/>
+              <file name="robots.txt"/>
+          </filelist>
+      </delete>
+      <delete dir="${public}/scripts"/>
+      <delete dir="${public}/styles"/>
+      <delete dir="${public}/views"/>
+  </target>
+
+
+  <target name="build-yeoman">
+      <!-- change to js-src and yeoman build -->
+      <exec dir="${js-src}" executable="yeoman">
+          <arg line="build"/>
+      </exec>
+  </target>
+
+  <target name="yeoman-build"
+      depends="build-yeoman,clean-yeoman-build"
+      description="yeoman build and mv build file to public">
+      <!-- copy all files under dist to public -->
+      <move todir="${public}">
+          <fileset dir="${js-src}/dist">
+              <include name="**/*"/>
+          </fileset>
+      </move>
+  </target>
+
+  <target name="dist" description="generate the distribution" >
+    <!-- now here is empty -->
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+  </target>
+</project>
