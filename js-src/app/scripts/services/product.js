@@ -1,15 +1,10 @@
 'use strict';
 
-jsSrcApp.factory('product', function() {
-  // Service logic
-  // ...
-
-  var meaningOfLife = 42;
-
-  // Public API here
+jsSrcApp.factory('product', ['$resource', function($resource) {
+  var dummyProducts = [{name: "ting", id: 1}, {name: "wang", id: 2}];
   return {
-    someMethod: function() {
-      return meaningOfLife;
+    get: function() {
+      return $resource('product.json');
     }
   };
-});
+}]);
