@@ -24,3 +24,5 @@ public/robots.txt
 public/scripts/
 public/styles/
 public/views/
+public/.htaccess
+js-src/dist
