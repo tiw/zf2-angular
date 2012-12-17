@@ -1,21 +1,59 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class IndexController extends AbstractRestfulController
 {
-    public function indexAction()
+    public function getList()
     {
-        return new ViewModel();
+        return array(1, 2, 3);
+    }
+
+    /**
+     * Return single resource
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    public function get($id)
+    {
+        return array('name' => 'ting', 'age' => 35, 'id' => $id);
+    }
+
+    /**
+     * Create a new resource
+     *
+     * @param mixed $data
+     * @return mixed
+     */
+    public function create($data)
+    {
+
+    }
+
+    /**
+     * Update an existing resource
+     *
+     * @param mixed $id
+     * @param mixed $data
+     * @return mixed
+     */
+    public function update($id, $data)
+    {
+
+    }
+
+    /**
+     * Delete an existing resource
+     *
+     * @param  mixed $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+
     }
 }

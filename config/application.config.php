@@ -1,7 +1,9 @@
 <?php
 return array(
     'modules' => array(
+        'Tiddr',
         'Application',
+        'Product',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(

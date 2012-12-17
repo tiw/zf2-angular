@@ -49,7 +49,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'product' => 'Application\Controller\IndexController',
+            //'product' => 'Application\Controller\IndexController',
         ),
     ),
     'view_manager' => array(
