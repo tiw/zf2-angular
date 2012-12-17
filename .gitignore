@@ -14,3 +14,13 @@ LICENSE.txt
 README.txt
 demos/
 extras/documentation
+js-src/temp
+public/.buildignore
+public/404.html
+public/favicon.ico
+public/index.html
+public/manifest.appcache
+public/robots.txt
+public/scripts/
+public/styles/
+public/views/
