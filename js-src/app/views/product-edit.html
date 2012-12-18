@@ -1,0 +1,12 @@
+<h1> 创建</h1>
+<form class="" action="" method="post">
+    <label for="name">名称</label>
+    <input type="text" name="name" value="" ng-model="product.name"/>
+    <label for="time">时间</label>
+    <input type="text" name="time" value="" ng-model="product.time"/>
+    <label for="price">价格</label>
+    <input type="text" name="price" value="" ng-model="product.price"
+    ng-filter="number"/>
+    <br/>
+    <a class="btn" ng-click="save()">保存</a>
+</form>

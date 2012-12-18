@@ -11,6 +11,10 @@ var jsSrcApp = angular.module('jsSrcApp', ['ngResource'])
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl'
       })
+      .when('/product-edit', {
+        templateUrl: 'views/product-edit.html',
+        controller: 'Product-EditCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
