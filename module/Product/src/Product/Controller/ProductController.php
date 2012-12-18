@@ -36,7 +36,15 @@ class ProductController extends AbstractRestfulController
      */
     public function get($id)
     {
-        return array('name' => 'ting', 'age' => 35, 'id' => $id);
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('product', array(
+                    'action' => 'add',
+                ));
+        }
+        $product = $this->getProductMapper()->findById($id);
+        $productHydrate = new ProductHydrator();
+        return $productHydrate->extract($product);
     }
 
     /**
