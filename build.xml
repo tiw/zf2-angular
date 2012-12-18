@@ -9,6 +9,14 @@
   <property name="js-src" location="js-src"/>
   <property name="public" location="public"/>
 
+  <target name="clean-front-data">
+      <delete>
+          <fileset dir="${public}">
+              <include name="**/*.json"/>
+          </fileset>
+      </delete>
+  </target>
+
   <target name="clean-yeoman-build">
       <delete>
           <filelist dir="${public}">
@@ -32,15 +40,17 @@
       </exec>
   </target>
 
-  <target name="yeoman-build"
-      depends="build-yeoman,clean-yeoman-build"
-      description="yeoman build and mv build file to public">
+  <target name="move-js-to-public">
       <!-- copy all files under dist to public -->
       <move todir="${public}">
           <fileset dir="${js-src}/dist">
               <include name="**/*"/>
           </fileset>
       </move>
+  </target>
+  <target name="yeoman-build"
+      depends="build-yeoman,clean-yeoman-build,move-js-to-public,clean-front-data"
+      description="yeoman build and mv build file to public">
   </target>
 
   <target name="dist" description="generate the distribution" >
