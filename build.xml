@@ -10,8 +10,9 @@
   <property name="public" location="public"/>
 
   <target name="clean-front-data">
+      <!-- remove all front end mock data -->
       <delete>
-          <fileset dir="${public}">
+          <fileset dir="${js-src}/dist">
               <include name="**/*.json"/>
           </fileset>
       </delete>
@@ -32,7 +33,6 @@
       <delete dir="${public}/views"/>
   </target>
 
-
   <target name="build-yeoman">
       <!-- change to js-src and yeoman build -->
       <exec dir="${js-src}" executable="yeoman">
@@ -48,8 +48,9 @@
           </fileset>
       </move>
   </target>
+
   <target name="yeoman-build"
-      depends="build-yeoman,clean-yeoman-build,move-js-to-public,clean-front-data"
+      depends="build-yeoman,clean-yeoman-build,clean-front-data,move-js-to-public"
       description="yeoman build and mv build file to public">
   </target>
 
