@@ -38,10 +38,6 @@ class Product extends Base
         return $this->select($select);
     }
 
-    public function fetchProductByCategory($id)
-    {
-        return $this->select($this->getSelect()->where(array('category_id' => $id)));
-    }
 }
 
 ?>

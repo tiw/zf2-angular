@@ -20,7 +20,6 @@ class ProductController extends AbstractRestfulController
     public function getList()
     {
         $products = $this->getProductMapper()->fetchAll();
-        $products->setCurrentPageNumber($this->params()->fromRoute('page'));
         $productHydrate = new ProductHydrator();
         foreach($products as $product) {
             $productArray[] = $productHydrate->extract($product);
@@ -55,7 +54,26 @@ class ProductController extends AbstractRestfulController
      */
     public function create($data)
     {
-
+        $form = $this->getServiceLocator()->get('ProductForm');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData(array(
+                'name' => $data->name, 'price' => $data->price,
+            ));
+            if ($form->isValid()) {
+                $mapper = $this->getProductMapper();
+                $product = $mapper->insert($form->getData());
+                foreach (range(1, 3) as $index) {
+                    $this->_saveFile($index, $product->getId());
+                }
+                $productHydrate = new ProductHydrator();
+                return $productHydrate->extract($product);
+            } else {
+                throw new \Exception('form not valid'. print_r($form->getMessages(), true));
+            }
+        } else {
+            throw new \Exception('can not save');
+        }
     }
 
     /**
