@@ -9,12 +9,33 @@
         <title></title>
         <meta name="description" content=""/>
         <meta name="viewport" content="width=device-width"/>
-        <link rel="stylesheet" href="styles/main.css"/>
         <link rel="stylesheet" href="styles/bootstrap.css"/>
+        <link rel="stylesheet" href="styles/main.css"/>
 
     </head>
     <body ng-app="jsSrcApp">
-        
+        <!-- Navbar
+        ================================================== -->
+        <div class="navbar navbar-inverse navbar-fixed-top ec3s-nav">
+          <div class="navbar-inner">
+            <div class="">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="brand" href="./index.html">EC3S CRM</a>
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li class="">
+                    <a href="./index.html">Home</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
@@ -25,8 +46,19 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="container well" ng-view></div>
-
+        <div class="container-fluid">
+            <div class="ec3s-container row-fluid">
+                <div class="span3">
+                    <ul class="nav nav-tabs nav-stacked">
+                        <li><a href="#/product">Product</a></li>
+                        <li><a href="#/product-edit">Add</a></li>
+                    </ul>
+                </div>
+                <div class="span9">
+                    <div class="well" ng-view></div>
+                </div>
+            </div>
+        </div>
         <script src="scripts/vendor/angular.js"></script>
         <script src="scripts/vendor/angular-resource.js"></script>
 
