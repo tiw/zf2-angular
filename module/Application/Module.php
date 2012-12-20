@@ -30,6 +30,17 @@ class Module
         $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_DISPATCH_ERROR,
             array($this, 'errorProcess'), 999
         );
+
+        $log = $e->getApplication()->getServiceManager()->get('Log');
+        $sharedEvents->attach('*', 'info', function($e) use ($log) {
+            $message = $e->getParam('message', 'No message provided');
+            $target = $e->getTarget();
+            if (is_object($target)) {
+                $target = get_class($target);
+            }
+            $message = sprintf('%s: %s', $target, $message);
+            $log->info($message);
+        });
     }
 
     public function postProcess(MvcEvent $e)

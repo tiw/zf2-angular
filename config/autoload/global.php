@@ -23,6 +23,14 @@ return array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter'
                 => 'Zend\Db\Adapter\AdapterServiceFactory',
+            'Log' => function ($sm) {
+                $log = new \Zend\Log\Logger();
+                $writer = new \Zend\Log\Writer\Stream(
+                    __DIR__ . '/../../data/logs/application.log'
+                );
+                $log->addWriter($writer);
+                return $log;
+            },
         ),
     ),
 );

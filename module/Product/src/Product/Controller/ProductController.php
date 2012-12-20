@@ -54,6 +54,9 @@ class ProductController extends AbstractRestfulController
      */
     public function create($data)
     {
+        $message = 'creating new product';
+        $this->getEventManager()->trigger('info', $this, array('message' => $message));
+
         $form = $this->getServiceLocator()->get('ProductForm');
         $request = $this->getRequest();
         if ($request->isPost()) {

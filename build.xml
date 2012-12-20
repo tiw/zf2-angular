@@ -9,6 +9,11 @@
   <property name="js-src" location="js-src"/>
   <property name="public" location="public"/>
 
+
+  <!-- dbdeploy {{{-->
+  <!-- end dbdeply }}} -->
+
+  <!--yeoman {{{ -->
   <target name="clean-front-data">
       <!-- remove all front end mock data -->
       <delete>
@@ -53,6 +58,9 @@
       depends="build-yeoman,clean-yeoman-build,clean-front-data,move-js-to-public"
       description="yeoman build and mv build file to public">
   </target>
+
+  <!-- end yeoman }}} -->
+
 
   <target name="dist" description="generate the distribution" >
     <!-- now here is empty -->

@@ -52,7 +52,6 @@ class Module extends AbstractModule
                     $form = new ProductForm();
                     $form->setHydrator(new ProductHydrator());
                     $form->setCategoryMapper($sm->get('Category\Model\Mapper\Category'));
-                    $form->setPersonMapper($sm->get('PersonMapper'));
                     $form->bind(new Product());
                     $form->init();
                     return $form;
