@@ -7,3 +7,9 @@ jsSrcApp.controller('MainCtrl', ['$scope', function($scope) {
     'Testacular'
   ];
 }]);
+
+jsSrcApp.controller('MainCtrl', ['$scope', 'products', function($scope, products) {
+    var Products = products.Products;
+    $scope.products = Products.query();
+    $scope.product = Products.get({id: 69});
+}]);
