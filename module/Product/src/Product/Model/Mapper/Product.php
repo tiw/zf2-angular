@@ -17,10 +17,17 @@ class Product extends Base
 
     protected $tableName = 'product';
 
+    protected function info($message)
+    {
+        $this->getEventManager()->trigger('info', $this, array('message' => $message));
+    }
+
     public function fetchAll()
     {
         $select = $this->getSelect();
-        $select->join(array('c' => 'category'), 'category_id = c.id', array('category_name' => 'name'));
+        //$select->join(array('c' => 'category'), 'category_id = c.id', array('category_name' => 'name'));
+
+        $this->info($select->getSqlString());
         return parent::fetchAll($select);
     }
 
@@ -39,5 +46,3 @@ class Product extends Base
     }
 
 }
-
-?>

@@ -27,3 +27,7 @@ public/views/
 public/.htaccess
 js-src/dist
 tags
+vendor/phpunit
+vendor/symfony
+vendor/prolic
+data/logs/application.log
