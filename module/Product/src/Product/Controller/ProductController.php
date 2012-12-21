@@ -17,9 +17,16 @@ class ProductController extends AbstractRestfulController
     protected $productMapper;
     protected $productImageMapper;
 
+    protected function info($message)
+    {
+        $this->getEventManager()->trigger('info', $this, array('message' => $message));
+    }
+
     public function getList()
     {
         $products = $this->getProductMapper()->fetchAll();
+        $products->setCurrentPageNumber(1);
+        $this->info(get_class($products));
         $productHydrate = new ProductHydrator();
         foreach($products as $product) {
             $productArray[] = $productHydrate->extract($product);
@@ -102,6 +109,12 @@ class ProductController extends AbstractRestfulController
 
     }
 
+
+    public function setProductMapper($productMapper)
+    {
+        $this->productMapper = $productMapper;
+        return $this;
+    }
     public function getProductMapper()
     {
         if (!$this->productMapper) {
