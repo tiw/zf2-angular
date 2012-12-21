@@ -45,6 +45,19 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
 
     public function testGetList()
     {
-        $this->pc->getList();
+        $p1 =  new \Product\Model\Product();
+        $p1->setName('name1');
+        $p2 =  new \Product\Model\Product();
+        $p2->setName('name2');
+        $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter(array(
+            $p1, $p2
+        )));
+        $pm = $this->getMock('\Product\Model\Mapper\Product');
+        $pm->expects($this->any())
+            ->method('fetchAll')
+            ->will($this->returnValue($paginator));
+        $this->pc->setProductMapper($pm);
+        $result = $this->pc->getList();
+        $this->assertEquals(2, count($result));
     }
 }

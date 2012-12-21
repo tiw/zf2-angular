@@ -26,7 +26,6 @@ class ProductController extends AbstractRestfulController
     {
         $products = $this->getProductMapper()->fetchAll();
         $products->setCurrentPageNumber(1);
-        $this->info(get_class($products));
         $productHydrate = new ProductHydrator();
         foreach($products as $product) {
             $productArray[] = $productHydrate->extract($product);
