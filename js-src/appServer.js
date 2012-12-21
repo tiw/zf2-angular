@@ -11,16 +11,7 @@ var app = express();
 
 // mysql conection
 var mysql = require('mysql');
-
 console.log('Connecting to MySQL...');
-/*
-var Products = client.query('SELECT * from product', function selectCb(err, rows, fields){
-  if (err) throw err;
-  console.log(rows);
-});
-
-client.end();
-*/
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);

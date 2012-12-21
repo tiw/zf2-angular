@@ -7,102 +7,14 @@
 			<th>操作</th>
 		</tr>
 	</thead>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
+	<tr ng-repeat="product in products">
+		<td>{{product.id}}</td>
+		<td><a href="#/product/{{product.id}}">{{product.name}}</a></td>
+		<td>{{product.created_at}}</td>
 		<td>
 			<a href="#"><i class="icon-edit"></i> 编辑</a>
 			<a href="#"><i class="icon-remove"></i> 删除</a>
 		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>1885</td>
-		<td><a href="#">Kindle DXG of Amazon</a></td>
-		<td>2012/12/12</td>
-		<td>
-			<a href="#"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
-		</td>
-	</tr>
+    	
+    </tr>
 </table>
-<div class="hero-unit">
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
-</div>
