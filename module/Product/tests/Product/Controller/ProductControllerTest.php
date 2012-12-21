@@ -60,4 +60,78 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
         $result = $this->pc->getList();
         $this->assertEquals(2, count($result));
     }
+
+    public function testGet()
+    {
+        $p = new \Product\Model\Product();
+        $p->setName('name1');
+        $p->setPrice(2);
+
+        $pm = $this->getMock('\Product\Model\Mapper\Product');
+        $pm->expects($this->any())
+            ->method('findById')
+            ->will($this->returnValue($p));
+        $this->pc->setProductMapper($pm);
+        $result = $this->pc->get(1);
+        $this->assertTrue(is_array($result));
+        $this->assertEquals('name1', $result['name']);
+        $this->assertEquals('2', $result['price']);
+    }
+
+    public function testCreate()
+    {
+
+        $p = new \Product\Model\Product();
+        $p->setName('name1');
+        $p->setPrice(2);
+        $p->setId(1);
+        $pm = $this->getMock('\Product\Model\Mapper\Product');
+        $pm->expects($this->any())
+            ->method('insert')
+            ->will($this->returnValue($p));
+        $this->pc->setProductMapper($pm);
+        $data = new \stdClass;
+        $data->name = 'name2';
+        $data->price = 2;
+        $result = $this->pc->create($data);
+        $this->assertEquals(1, $result['id']);
+        $this->assertEquals('name1', $result['name']);
+        $this->assertEquals('2', $result['price']);
+    }
+
+    public function testDelete()
+    {
+        $pm = $this->getMock('\Product\Model\Mapper\Product');
+        $pm->expects($this->any())
+            ->method('delete')
+            ->will($this->returnValue(''));
+        $this->pc->setProductMapper($pm);
+        $id = 3;
+        $result = $this->pc->delete($id);
+    }
+
+    public function testUpdate()
+    {
+        $p = new \Product\Model\Product();
+        $p->setName('name1');
+        $p->setPrice(2);
+        $p->setId(1);
+        $pm = $this->getMock('\Product\Model\Mapper\Product');
+        $pm->expects($this->any())
+            ->method('update')
+            ->will($this->returnValue($p));
+        $pm->expects($this->any())
+            ->method('findById')
+            ->will($this->returnValue($p));
+        $this->pc->setProductMapper($pm);
+        $data = new \stdClass;
+        $data->name = 'name2';
+        $data->price = 3;
+        $data->id = 1;
+        $result = $this->pc->update($data->id, $data);
+        $this->assertEquals(1, $result['id']);
+        $this->assertEquals('name2', $result['name']);
+        $this->assertEquals('3', $result['price']);
+        
+    }
 }
