@@ -7,7 +7,7 @@ var jsSrcApp = angular.module('jsSrcApp', ['ngResource'])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/product', {
+      .when('/product/:id', {
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl'
       })
