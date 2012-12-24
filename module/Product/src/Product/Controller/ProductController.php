@@ -5,6 +5,7 @@ namespace Product\Controller;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Product\Model\Image;
 use Product\Model\Mapper\ProductHydrator;
+use Zend\Json\Json;
 
 /**
  * Description of ProductController
@@ -16,6 +17,17 @@ class ProductController extends AbstractRestfulController
 
     protected $productMapper;
     protected $productImageMapper;
+
+    /**
+     * processPostData 
+     * 
+     * @param Request $request 
+     * @return mixed
+     */
+    public function processPostData($request)
+    {
+        return $this->create(Json::decode($request->getContent()));
+    }
 
     protected function info($message)
     {
@@ -65,6 +77,7 @@ class ProductController extends AbstractRestfulController
         $product->setName($data->name);
         $product->setPrice($data->price);
         $mapper = $this->getProductMapper();
+        $this->info(print_r($product, true));
         $product = $mapper->insert($product);
         return $this->getProductHydrate()->extract($product);
     }
