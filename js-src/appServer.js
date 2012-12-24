@@ -75,6 +75,16 @@ app.get('/products.json', function(req, res){
   client.end();
 });
 
+app.get('/products.json/:id', function(req, res){
+  var id = req.params.id;
+  var client = connectionServer();
+  client.query('SELECT * from product where id='+id, function selectCb(err, rows, fields){
+    if (err) throw err;
+    res.send(JSON.stringify(rows[0]));
+  });
+});
+
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
