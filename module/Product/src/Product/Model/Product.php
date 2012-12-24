@@ -29,6 +29,13 @@ class Product
     protected $price;
 
 
+    /**
+     * publishAt 
+     * 
+     * @var date
+     */
+    protected $publishAt;
+
     public function getId()
     {
         return $this->id;
@@ -56,6 +63,30 @@ class Product
     public function setPrice($price)
     {
         $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * getPublishAt 
+     * 
+     * @return string
+     */
+    public function getPublishAt()
+    {
+        return $this->publishAt;
+    }
+
+    /**
+     * setPublishAt 
+     * 
+     * @param string $publishAt publish at
+     *
+     * @return Product\Model\Product
+     */
+    public function setPublishAt($publishAt)
+    {
+        $publishAt = date("Y-m-d", strtotime($publishAt));
+        $this->publishAt = $publishAt;
         return $this;
     }
 }

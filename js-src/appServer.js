@@ -28,33 +28,6 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-/*
-app.get('/:name', function(req), res) {
-  // get name.json.get file!
-  res.send(name.json.get);
-});
-
-app.get('/:name/:id', function(req), res) {
-  // get name.json.get file!
-  res.send(name.json.get.id);
-});
-
-app.post('/:name', function(req), res) {
-  // get name.json.get file!
-  res.send(name.json.post);
-});
-
-app.put('/:name', function(req), res) {
-  // get name.json.get file!
-  res.send(name.json.put);
-});
-
-app.delete('/:name', function(req), res) {
-  // get name.json.get file!
-  res.send(name.json.delete);
-});
-*/
-
 function connectionServer(){
   var client = mysql.createConnection({
     host : 'localhost',
@@ -66,7 +39,17 @@ function connectionServer(){
   return client;
 }
 
-app.get('/products.json', function(req, res){
+// create
+app.post('/product.json', function(req, res){
+  var data ={};
+  data.name = 'hello';
+  data.publishAt = new Date();
+  data.price = '111';
+  return res.send(data);
+});
+
+// read
+app.get('/product.json', function(req, res){
   var client = connectionServer();
   client.query('SELECT * from product', function selectCb(err, rows, fields){
     if (err) throw err;
@@ -75,21 +58,29 @@ app.get('/products.json', function(req, res){
   client.end();
 });
 
-app.post('/products.json', function(req, res){
-  var data = {};
-  data.title = req.body.name || 'hello world';
-  data.time = req.body.time || new Date();
-  data.price = req.body.price || 1;
-  res.send(data);
-});
-
-app.get('/products.json/:id', function(req, res){
+app.get('/product.json/:id', function(req, res){
   var id = req.params.id;
   var client = connectionServer();
   client.query('SELECT * from product where id='+id, function selectCb(err, rows, fields){
     if (err) throw err;
     res.send(JSON.stringify(rows[0]));
   });
+});
+
+// update
+app.put('/product.json/:id', function(req, res){
+  console.log('update');
+  var data ={};
+  data.name = 'hello';
+  data.publishAt = new Date();
+  data.price = '111';
+  return res.send(data);
+});
+
+// delete
+app.delete('/product.json/:id', function(req, res){
+  console.log('delete');
+  return res.send('delete');
 });
 
 

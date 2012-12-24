@@ -31,3 +31,4 @@ vendor/phpunit
 vendor/symfony
 vendor/prolic
 data/logs/application.log
+js-src/node_modules
