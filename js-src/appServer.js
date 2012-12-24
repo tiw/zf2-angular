@@ -75,6 +75,14 @@ app.get('/products.json', function(req, res){
   client.end();
 });
 
+app.post('/products.json', function(req, res){
+  var data = {};
+  data.title = req.body.name || 'hello world';
+  data.time = req.body.time || new Date();
+  data.price = req.body.price || 1;
+  res.send(data);
+});
+
 app.get('/products.json/:id', function(req, res){
   var id = req.params.id;
   var client = connectionServer();
