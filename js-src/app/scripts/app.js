@@ -15,6 +15,10 @@ var jsSrcApp = angular.module('jsSrcApp', ['ngResource'])
         templateUrl: 'views/products.html',
         controller: 'ProductsCtrl'
       })
+      .when('/product-edit/:id', {
+        templateUrl: 'views/product-edit.html',
+        controller: 'Product-EditCtrl'
+      })
       .when('/product-edit', {
         templateUrl: 'views/product-edit.html',
         controller: 'Product-EditCtrl'
