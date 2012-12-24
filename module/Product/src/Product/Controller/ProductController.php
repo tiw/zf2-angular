@@ -94,6 +94,7 @@ class ProductController extends AbstractRestfulController
         $product = new \Product\Model\Product();
         $product->setName($data->name);
         $product->setPrice($data->price);
+        $product->setPublishAt($data->publishAt);
         $mapper = $this->getProductMapper();
         $product = $mapper->insert($product);
         return $this->getProductHydrate()->extract($product);
