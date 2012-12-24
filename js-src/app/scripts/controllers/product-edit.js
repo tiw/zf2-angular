@@ -1,15 +1,26 @@
 'use strict';
 
-jsSrcApp.controller('Product-EditCtrl', ['$scope', 'product', function($scope, product) {
-    var newProduct = {};
-    $scope.product = newProduct;
-    var Product = product.Product;
+jsSrcApp.controller(
+    'Product-EditCtrl', ['$scope', 'product', function($scope, product) {
+    $scope.title = 'Add product';
+    $scope.product = new product.Product;
+    var scope = $scope;
     $scope.save = function() {
-        var p = Product.get();
-        p.name = newProduct.name;
-        p.time = newProduct.time;
-        p.price = newProduct.price;
-        p.$save();
-    }
-    }
+        var product = scope.product;
+        if (product.id) {
+            //update it
+            product.$update(function(product) {
+                console.log(product);
+                scope.title = 'Edit: ' + product.name;
+                scope.product = product;
+            });
+        } else {
+            product.$save(function(product) {
+                console.log(product);
+                scope.title = 'Edit: ' + product.name;
+                scope.product = product;
+            });
+        }
+    };
+}
 ]);

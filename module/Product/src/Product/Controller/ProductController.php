@@ -5,6 +5,7 @@ namespace Product\Controller;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Product\Model\Image;
 use Product\Model\Mapper\ProductHydrator;
+use Zend\Json\Json;
 
 /**
  * Description of ProductController
@@ -16,6 +17,35 @@ class ProductController extends AbstractRestfulController
 
     protected $productMapper;
     protected $productImageMapper;
+
+    /**
+     * processPostData 
+     * 
+     * @param Request $request 
+     * @return mixed
+     */
+    public function processPostData($request)
+    {
+        return $this->create(Json::decode($request->getContent()));
+    }
+
+    /**
+     * processPutData 
+     * 
+     * @param mixed $request 
+     * @return stdClass
+     */
+    public function processPutData($request, $routeMatch)
+    {
+        if (null === $id = $routeMatch->getParam('id')) {
+            if (!($id = $request->getQuery()->get('id', false))) {
+                throw new Exception\DomainException('Missing identifier');
+            }
+        }
+        $content = $request->getContent();
+
+        return $this->update($id, Json::decode($request->getContent()));
+    }
 
     protected function info($message)
     {
