@@ -29,6 +29,24 @@ class ProductController extends AbstractRestfulController
         return $this->create(Json::decode($request->getContent()));
     }
 
+    /**
+     * processPutData 
+     * 
+     * @param mixed $request 
+     * @return stdClass
+     */
+    public function processPutData($request, $routeMatch)
+    {
+        if (null === $id = $routeMatch->getParam('id')) {
+            if (!($id = $request->getQuery()->get('id', false))) {
+                throw new Exception\DomainException('Missing identifier');
+            }
+        }
+        $content = $request->getContent();
+
+        return $this->update($id, Json::decode($request->getContent()));
+    }
+
     protected function info($message)
     {
         $this->getEventManager()->trigger('info', $this, array('message' => $message));
@@ -77,7 +95,6 @@ class ProductController extends AbstractRestfulController
         $product->setName($data->name);
         $product->setPrice($data->price);
         $mapper = $this->getProductMapper();
-        $this->info(print_r($product, true));
         $product = $mapper->insert($product);
         return $this->getProductHydrate()->extract($product);
     }
