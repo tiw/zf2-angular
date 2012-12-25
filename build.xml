@@ -96,8 +96,14 @@
       <!-- remove all front end mock data -->
       <delete>
           <fileset dir="${js-src}/dist">
+              <include name="**/*.json.*"/>
               <include name="**/*.json"/>
           </fileset>
+      </delete>
+      <delete>
+          <filelist dir="${js-src}/dist">
+              <file name="web-server.js"/>
+          </filelist>
       </delete>
   </target>
 
