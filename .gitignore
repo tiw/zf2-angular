@@ -32,3 +32,5 @@ vendor/symfony
 vendor/prolic
 data/logs/application.log
 js-src/node_modules
+deployment/build.properties
+public/img
