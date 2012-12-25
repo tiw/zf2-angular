@@ -8,9 +8,87 @@
   <property name="dist"  location="dist"/>
   <property name="js-src" location="js-src"/>
   <property name="public" location="public"/>
+  <property name="deply" location="deployment"/>
 
 
   <!-- dbdeploy {{{-->
+    <property file="${deply}/build.properties" />
+    <property name="dbdeploy_dir" value="${deply}/dbdeploy"/>
+    <property name="mweb_dir" value="${dbdeploy_dir}/mweb_ant"/>
+    <property name="deltas_dir" value="${dbdeploy_dir}/deltas"/>
+
+    <!-- add mysql driver -->
+    <property name="db.driver" value="com.mysql.jdbc.Driver" />
+    <!-- set dns -->
+    <property name="url"
+	      value="jdbc:mysql://${db.host}/" />
+    <property name="db.url" 
+	      value="jdbc:mysql://${db.host}/${db.name}" />
+    <!-- add mysql driver class path -->
+    <path id="mysql.classpath">
+        <fileset dir="${dbdeploy_dir}">
+            <include name="mysql-connector-java-5.1.22-bin.jar"/>
+        </fileset>
+    </path>
+    <!-- set dbdeploy class path -->
+    <path id="dbdeploy.classpath">
+        <!-- include the dbdeploy-ant jar -->
+        <fileset dir="${dbdeploy_dir}">
+            <include name="dbdeploy-ant-*.jar"/>
+        </fileset>
+        <!-- the dbdeploy task also needs the database driver jar on the classpath -->
+        <path refid="mysql.classpath" />
+    </path>
+    <path id="mweb.classpath">
+      <fileset dir="${mweb_dir}">
+	    <include name="*.jar" />
+      </fileset>
+      <path refid="mysql.classpath" />
+    </path>
+
+      <!-- 
+      ***********************************************************************************
+      *         start of database tasks 
+      ***********************************************************************************
+      -->
+    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget" classpathref="dbdeploy.classpath"/>
+    <taskdef name="mw_truncate" classname="com.mweb.ant.TruncateTable" classpathref="mweb.classpath"/>
+    <taskdef name="mw_drop" classname="com.mweb.ant.DropDatabases" classpathref="mweb.classpath"/>
+    <taskdef name="mw_create_db" classname="com.mweb.ant.CreateDatabase" classpathref="mweb.classpath"/>
+
+    <target name="create-changelog-table">
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.user}" password="${db.pass}" classpathref="mysql.classpath" >
+            <fileset file="${dbdeploy_dir}/createSchemaVersionTable.mysql.sql"/>
+        </sql>
+    </target>
+
+  	<!-- drop the dev dbs and create fresh dev dbs -->
+    <target name="drop-create-db">
+        <antcall target="drop-create-a-database">
+            <param name="driver" value="${db.driver}" />
+            <param name="user" value="${db.user}" />
+            <param name="pass" value="${db.pass}" />
+            <param name="url" value="${url}" />
+            <param name="dbname" value="${db.name}" />
+        </antcall>
+    </target>
+    <target name="drop-create-a-database">
+        <mw_drop driver="${driver}" userid="${user}" password="${pass}"
+                 url="${url}" classpathref="mysql.classpath"
+                 pattern="${dbname}"/>
+        <mw_create_db driver="${driver}" userid="${user}" password="${pass}"
+                 url="${url}" classpathref="mysql.classpath"
+                 databaseName="${dbname}"/>
+    </target>
+    <target name="migrate">
+        <dbdeploy driver="${db.driver}" url="${db.url}"
+                  userid="${db.user}"
+                  password="${db.pass}"
+                  dir="${deltas_dir}"
+                />
+    </target>
+
   <!-- end dbdeply }}} -->
 
   <!--yeoman {{{ -->
