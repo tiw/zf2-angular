@@ -13,7 +13,7 @@
 		<td>{{product.created_at}}</td>
 		<td>
 			<a href="#/product-edit/{{product.id}}"><i class="icon-edit"></i> 编辑</a>
-			<a href="#"><i class="icon-remove"></i> 删除</a>
+			<a href="#" ng-click="delete(product.id)"><i class="icon-remove"></i> 删除</a>
 		</td>
     	
     </tr>
