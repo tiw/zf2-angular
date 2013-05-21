@@ -17,7 +17,9 @@ A prototype using zf2 as backend and anuglarjs as frontend.
 1. 创建一个数据库，名字为ppm
 2. 导入data/install.sql
 3. 创建config/autoload/local.php 添加如下内容
-<code>
+
+```php
+
 <?php
 
 return array(
@@ -27,8 +29,9 @@ return array(
     )
 );
 
-</code>
+```
+
 ### 测试页面
-http://<your_domain_name>/#/product
+    http://<your_domain_name>/#/product
 
 
